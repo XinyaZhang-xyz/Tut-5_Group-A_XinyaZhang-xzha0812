@@ -38,7 +38,7 @@ function makeRGB(redInputValue, greenInputValue, blueInputValue) {
 
 /****************** Top left shape data definition ******************/
 const rects_topleft = [
-  { x: 0, y: 10, w: 250, h: 280, color: makeRGB(36, 149, 248) }, 
+  { x: 0, y: 10, w: 250, h: 280, color: makeRGB(36, 149, 248) },
   { x: 290, y: 10, w: 210, h: 290, color: makeRGB(230, 229, 234) },
   { x: 0, y: 200, w: 90, h: 90, color: makeRGB(74, 86, 102) },
   { x: 90, y: 200, w: 70, h: 60, color: makeRGB(248, 249, 251) },
@@ -239,32 +239,58 @@ const lines_topright_3 = [
 
 /****************** Bottom right shape data definition ******************/
 const circles_bottomright_yellow = [
-  { x: 30, y: -10, r: 180, color:'rgba(245, 202, 37, 0.3)' },
-  { x: 160, y: 165, r: 28, color:'rgba(245, 202, 37, 0.7)' },
-  { x: 140, y: 90, r: 20, color:'rgba(245, 202, 37, 1)' },
-  { x: 180, y: 40, r: 5, color:'rgba(245, 202, 37, 0.5)' },
-  { x: 160, y: 20, r: 10, color:'rgba(245, 202, 37, 0.7)' },
+  { x: 30, y: -10, r: 180, color: 'rgba(245, 202, 37, 0.3)' },
+  { x: 160, y: 165, r: 28, color: 'rgba(245, 202, 37, 0.7)' },
+  { x: 140, y: 90, r: 20, color: 'rgba(245, 202, 37, 1)' },
+  { x: 180, y: 40, r: 5, color: 'rgba(245, 202, 37, 0.5)' },
+  { x: 160, y: 20, r: 10, color: 'rgba(245, 202, 37, 0.7)' },
 ]
 const rects_bottom_right_yellow = [
-  { x: 250, y: 0, w: 250, h: 60, color:'rgba(245, 202, 37, 1)'},
-  { x: 320, y: 90, w: 180, h: 80, color:'rgba(245, 202, 37, 0.5)' },
-  { x: 220, y: 170, w: 100, h: 130, color:'rgba(245, 202, 37, 1)' },
-  { x: 0, y: 250, w: 140, h: 40, color:'rgba(245, 202, 37, 0.7)' },
-  { x: 0, y: 170, w: 100, h: 120, color:'rgba(245, 202, 37, 0.5)' },
+  { x: 250, y: 0, w: 250, h: 60, color: 'rgba(245, 202, 37, 1)' },
+  { x: 320, y: 90, w: 180, h: 80, color: 'rgba(245, 202, 37, 0.5)' },
+  { x: 220, y: 170, w: 100, h: 130, color: 'rgba(245, 202, 37, 1)' },
+  { x: 0, y: 250, w: 140, h: 40, color: 'rgba(245, 202, 37, 0.7)' },
+  { x: 0, y: 170, w: 100, h: 120, color: 'rgba(245, 202, 37, 0.5)' },
 ]
 const rects_bottom_right_blue = [
-  { x: 0, y: 0, w: 100, h: 130, color:'rgba(17, 99, 247, 0.7)'},
-  { x: 0, y: 130, w: 100, h: 40, color:'rgba(17, 99, 247, 0.4)'},
-  { x: 30, y: 220, w: 150, h: 40, color:'rgba(17, 99, 247, 0.5)' },
-  { x: 140, y: 200, w: 80, h: 100, color:'rgba(17, 99, 247, 0.2)' },
-  { x: 400, y: 200, w: 100, h: 100, color:'rgba(17, 99, 247, 0.7)'},
+  { x: 0, y: 0, w: 100, h: 130, color: 'rgba(17, 99, 247, 0.7)' },
+  { x: 0, y: 130, w: 100, h: 40, color: 'rgba(17, 99, 247, 0.4)' },
+  { x: 30, y: 220, w: 150, h: 40, color: 'rgba(17, 99, 247, 0.5)' },
+  { x: 140, y: 200, w: 80, h: 100, color: 'rgba(17, 99, 247, 0.2)' },
+  { x: 400, y: 200, w: 100, h: 100, color: 'rgba(17, 99, 247, 0.7)' },
 ]
 const circles_bottomright_blue = [
-  { x: 360, y: 230, r: 20, color:'rgba(17, 99, 247, 1)' },
-  { x: 320, y: 150, r: 10, color:'rgba(17, 99, 247, 1)' },
-  { x: 100, y: 220, r: 10, color:'rgba(17, 99, 247, 1)' },
-  { x: 100, y: 40, r: 10, color:'rgba(17, 99, 247, 1)' },
-  { x: 320, y: 70, r: 25, color:'rgba(17, 99, 247, 1)' },
+  { x: 360, y: 230, r: 20, color: 'rgba(17, 99, 247, 1)' },
+  { x: 320, y: 150, r: 10, color: 'rgba(17, 99, 247, 1)' },
+  { x: 100, y: 220, r: 10, color: 'rgba(17, 99, 247, 1)' },
+  { x: 100, y: 40, r: 10, color: 'rgba(17, 99, 247, 1)' },
+  { x: 320, y: 70, r: 25, color: 'rgba(17, 99, 247, 1)' },
+  { x: 410, y: 210, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 430, y: 210, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 450, y: 210, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 470, y: 210, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 490, y: 210, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 410, y: 230, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 430, y: 230, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 450, y: 230, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 470, y: 230, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 490, y: 230, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 410, y: 250, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 430, y: 250, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 450, y: 250, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 470, y: 250, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 490, y: 250, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 410, y: 270, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 430, y: 270, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 450, y: 270, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 470, y: 270, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 490, y: 270, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 410, y: 290, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 430, y: 290, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 450, y: 290, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 470, y: 290, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  { x: 490, y: 290, r: 5, color: 'rgba(17, 99, 247, 1)' },
+  
 ]
 const lines_bottomright = [
   { x1: 0, y1: 200, x2: 180, y2: 200 },
@@ -276,13 +302,19 @@ const lines_bottomright = [
   { x1: 360, y1: 220, x2: 360, y2: 170 },
   { x1: 320, y1: 150, x2: 320, y2: 0 },
   { x1: 183, y1: 120, x2: 183, y2: 0 },
+  { x1: 410, y1: 200, x2: 410, y2: 300 },
+  { x1: 430, y1: 200, x2: 430, y2: 300 },
+  { x1: 450, y1: 200, x2: 450, y2: 300 },
+  { x1: 470, y1: 200, x2: 470, y2: 300 },
+  { x1: 490, y1: 200, x2: 490, y2: 300 },
 ]
-const arcsToDraw = [
-  { cx: 100,
+const arcs_bottomright = [
+  {
+    cx: 100,
     cy: 115,
     radius: 132,
-    startAngle: Math.PI/35,
-    endAngle: Math.PI/2,
+    startAngle: Math.PI / 35,
+    endAngle: Math.PI / 2,
   },
   {
     cx: 235,
@@ -295,8 +327,8 @@ const arcsToDraw = [
     cx: 100,
     cy: 115,
     radius: 132,
-    startAngle: Math.PI/2,
-    endAngle: Math.PI/-2,
+    startAngle: Math.PI / 2,
+    endAngle: Math.PI / -2,
   },
   {
     cx: 330,
@@ -306,8 +338,6 @@ const arcsToDraw = [
     endAngle: 0,
   }
 ];
-
-
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -320,12 +350,72 @@ function setup() {
 /**************************** Main drawing function ****************************/
 function draw() {
   background(250, 247, 235);
-  stroke(20);
-  strokeWeight(1);
+  // Calculate the horizontal and vertical scaling ratios to ensure that the graphic adapts to the screen size.
+  // width and height are the current width and height of the canvas.
+  // baseWidth and baseHeight are the original dimensions used as a reference during design.
   let scaleX = width / baseWidth;
   let scaleY = height / baseHeight;
 
-  //--------------------Top left--------------------//
+  //-----------------------Top left-----------------------//
+  drawTopLeft(scaleX, scaleY);
+
+  //-----------------------Top right-----------------------//
+  drawTopRight(scaleX, scaleY);
+
+  //----------------------Bottom left----------------------//
+  drawBottomLeft(scaleX, scaleY);
+
+  //----------------------Bottom right---------------------//
+  drawBottomRight(scaleX, scaleY);
+
+  // Draw fixed-size, scalable circles at a specified location //
+  drawFixedCircles(scaleX, scaleY);
+
+  //-------------Draw coordinate axes and text------------//
+  drawCoordinates();
+  
+}
+
+
+
+/********************************* Function zone 1 *********************************/
+//---- Function：draw dots inside the rectangle and scale to fit. ----//
+function drawDotsInRect(rectObj, scaleX = 1, scaleY = 1) {
+  let dotR = 5 * ((scaleX + scaleY) / 2);
+  let gapX = 10 * scaleX;
+  let gapY = 5 * scaleY;
+
+  fill(245, 202, 37);
+  noStroke();
+  for (let x = rectObj.x + gapX / 2; x < rectObj.x + rectObj.w; x += gapX) {
+    for (let y = rectObj.y + gapY / 2; y < rectObj.y + rectObj.h; y += gapY) {
+      ellipse(x, y, dotR, dotR);
+    }
+  }
+  stroke(20);
+}
+
+//---- Function：draw lines inside the circles and scale to fit. ----//
+function drawLinesInCircle(circleObj) {
+  let gap = circleObj.r / 8; // Gap of lines
+  stroke(255, 221, 51);
+  strokeWeight(2);
+  // Filled with lines
+  for (let y = circleObj.y - circleObj.r + gap / 2; y < circleObj.y + circleObj.r; y += gap) {
+    for (let x = circleObj.x - circleObj.r; x <= circleObj.x + circleObj.r; x += 1) {
+      if (dist(x, y, circleObj.x, circleObj.y) < circleObj.r) {
+        point(x, y);
+      }
+    }
+  }
+  stroke(30);
+}
+/********************************* --------------- *********************************/
+
+
+/************************ Function zone 2 - Drawing four parts ************************/
+//---------------- Function: draw top left shapes ----------------//
+function drawTopLeft(scaleX, scaleY) {
   for (let i = 0; i < rects_topleft.length; i++) {
     let r = rects_topleft[i];
     fill(r.color);
@@ -380,8 +470,10 @@ function draw() {
     let y2 = l.y2 * scaleY;
     line(x1, y1, x2, y2);
   }
+}
 
-  //-----------------------Top right-----------------------//
+//---------------- Function: draw top right shapes ----------------//
+function drawTopRight(scaleX, scaleY) {
   push();
   translate(width, 0); // Move the origin to the right side
   scale(-1, 1);        // Flip horizontally
@@ -482,163 +574,11 @@ function draw() {
     line(l.x1 * scaleX, l.y1 * scaleY, l.x2 * scaleX, l.y2 * scaleY);
   }
   pop();
-
-
-  //-----------------------Bottom right-----------------------//
-  push();
-  // All coordinates are calculated from right to left and from bottom to top.
-  translate(width, height); // Move the origin to the bottom right corner.
-  scale(-1, -1);            // Horizontal + vertical flip.
-  for (let i = 0; i < circles_bottomright_yellow.length; i++) {
-    let c = circles_bottomright_yellow[i];
-    fill(c.color);
-    noStroke();
-    let x = c.x * scaleX;
-    let y = c.y * scaleY;
-    let r = c.r * ((scaleX + scaleY) / 2);
-    ellipse(x, y, r * 2, r * 2);
-  }
-  for (let i = 0; i < rects_bottom_right_yellow.length; i++) {
-    let r = rects_bottom_right_yellow[i];
-    fill(r.color);
-    noStroke();
-    rect(
-      r.x * scaleX,
-      r.y * scaleY,
-      r.w * scaleX,
-      r.h * scaleY
-    );
-  }
-  for (let i = 0; i < rects_bottom_right_blue.length; i++) {
-    let r = rects_bottom_right_blue[i];
-    fill(r.color);
-    noStroke();
-    rect(
-      r.x * scaleX,
-      r.y * scaleY,
-      r.w * scaleX,
-      r.h * scaleY
-    );
-  }
-  for (let i = 0; i < circles_bottomright_blue.length; i++) {
-    let c = circles_bottomright_blue[i];
-    fill(c.color);
-    noStroke();
-    let x = c.x * scaleX;
-    let y = c.y * scaleY;
-    let r = c.r * ((scaleX + scaleY) / 2);
-    ellipse(x, y, r * 2, r * 2);
-  }
-  for (let i = 0; i < lines_bottomright.length; i++) {
-    let l = lines_bottomright[i];
-    stroke(makeRGB(17, 99, 247));
-    strokeWeight(2);
-    line(l.x1 * scaleX, l.y1 * scaleY, l.x2 * scaleX, l.y2 * scaleY);
-  }
-  for (let i = 0; i < arcsToDraw.length; i++) {
-    const arcData = arcsToDraw[i];
-    stroke(makeRGB(17, 99, 247));
-    strokeWeight(2);
-    noFill();
-    arc(
-      arcData.cx * scaleX,
-      arcData.cy * scaleY,
-      arcData.radius * ((scaleX + scaleY) / 2),
-      arcData.radius * ((scaleX + scaleY) / 2),
-      arcData.startAngle,
-      arcData.endAngle,
-    );
-  }
-  pop();
-
-  //-----------------------Bottom right-----------------------//
-  drawLeftCorner();
-
-
-  //----Draw fixed-size, scalable circles at a specified location----//
-  let refCircle1 = { x: 140, y: 15, w: 130, h: 120 };
-  let circleX1 = width - (refCircle1.x + refCircle1.w / 2) * scaleX;
-  let circleY1 = refCircle1.y * scaleY + (refCircle1.h / 2) * scaleY;
-  let radius1 = 25 * scaleX;
-  let fillColor1 = makeRGB(248, 249, 251);
-  fill(fillColor1);
-  noStroke();
-  ellipse(circleX1, circleY1, radius1 * 2, radius1 * 2);
-  drawLinesInCircle({ x: circleX1, y: circleY1, r: radius1 });
-
-  let refCircle2 = { x: 150, y: 210, w: 130, h: 120 };
-  let circleX2 = width - (refCircle2.x + refCircle2.w / 2) * scaleX;
-  let circleY2 = refCircle2.y * scaleY + (refCircle2.h / 2) * scaleY;
-  let radius2 = 25 * scaleX;
-  let fillColor2 = makeRGB(248, 249, 251);
-  fill(fillColor2);
-  noStroke();
-  ellipse(circleX2, circleY2, radius2 * 2, radius2 * 2);
-  drawLinesInCircle({ x: circleX2, y: circleY2, r: radius2 });
-
-
-  //------------------Draw coordinate axes and text-----------------//
-  stroke(100);
-  strokeWeight(1);
-  let margin = 40;
-  let margin1 = 40;
-  let margin2 = 100;
-  // Horizontal line
-  line(margin2, height / 2, width - margin2, height / 2);
-  // Vertical lines
-  line(width / 2, margin1, width / 2, height - margin1);
-  // Text style
-  textAlign(CENTER, CENTER);
-  textSize(16);
-  noStroke();
-  fill(20);
-  // Horizontal line：Sensing and Intuition
-  text('Sensing', margin / 2 + textWidth('Sensing') / 2, height / 2);
-  text('Intuition', width - margin / 2 - textWidth('Intuition') / 2, height / 2);
-  // Vertical lines：Thinking and Feeling
-  text('Thinking', width / 2, margin / 2);
-  text('Feeling', width / 2, height - margin / 2);
 }
-
-
-
-/********************************* Function zone *********************************/
-//---- Function：draw dots inside the rectangle and scale to fit. ----//
-function drawDotsInRect(rectObj, scaleX = 1, scaleY = 1) {
-  let dotR = 5 * ((scaleX + scaleY) / 2);
-  let gapX = 10 * scaleX;
-  let gapY = 5 * scaleY;
-
-  fill(245, 202, 37);
-  noStroke();
-  for (let x = rectObj.x + gapX / 2; x < rectObj.x + rectObj.w; x += gapX) {
-    for (let y = rectObj.y + gapY / 2; y < rectObj.y + rectObj.h; y += gapY) {
-      ellipse(x, y, dotR, dotR);
-    }
-  }
-  stroke(20);
-}
-
-//---- Function：draw lines inside the circles and scale to fit. ----//
-function drawLinesInCircle(circleObj) {
-  let gap = circleObj.r / 8; // Gap of lines
-  stroke(255, 221, 51);
-  strokeWeight(2);
-  // Filled with lines
-  for (let y = circleObj.y - circleObj.r + gap / 2; y < circleObj.y + circleObj.r; y += gap) {
-    for (let x = circleObj.x - circleObj.r; x <= circleObj.x + circleObj.r; x += 1) {
-      if (dist(x, y, circleObj.x, circleObj.y) < circleObj.r) {
-        point(x, y);
-      }
-    }
-  }
-  stroke(30);
-}
-
 
 //--------------------- Function: draw bottom left triangles-----------------------//
 // Render the Sensing-Feeling quadrant with gradient triangles representing emotional patterns
-function drawLeftCorner() {
+function drawBottomLeft() {
   // Define the background border，to limit the area of the background and the content
   let backColorBorder = {
     x: 0,
@@ -860,6 +800,123 @@ function drawGradientTriangle(p1, p2, p3, c1, c2) {
 }
 
 
+//---------------- Function: draw bottom right shapes ----------------//
+function drawBottomRight(scaleX, scaleY) {
+  push();
+   
+  translate(width, height); // Move the origin to the bottom right corner.
+  scale(-1, -1);            // Horizontal + vertical flip.
+  for (let i = 0; i < circles_bottomright_yellow.length; i++) {
+    let c = circles_bottomright_yellow[i];
+    fill(c.color);
+    noStroke();
+    let x = c.x * scaleX;
+    let y = c.y * scaleY;
+    let r = c.r * ((scaleX + scaleY) / 2);
+    ellipse(x, y, r * 2, r * 2);
+  }
+  for (let i = 0; i < rects_bottom_right_yellow.length; i++) {
+    let r = rects_bottom_right_yellow[i];
+    fill(r.color);
+    noStroke();
+    rect(
+      r.x * scaleX,
+      r.y * scaleY,
+      r.w * scaleX,
+      r.h * scaleY
+    );
+  }
+  for (let i = 0; i < rects_bottom_right_blue.length; i++) {
+    let r = rects_bottom_right_blue[i];
+    fill(r.color);
+    noStroke();
+    rect(
+      r.x * scaleX,
+      r.y * scaleY,
+      r.w * scaleX,
+      r.h * scaleY
+    );
+  }
+  for (let i = 0; i < circles_bottomright_blue.length; i++) {
+    let c = circles_bottomright_blue[i];
+    fill(c.color);
+    noStroke();
+    let x = c.x * scaleX;
+    let y = c.y * scaleY;
+    let r = c.r * ((scaleX + scaleY) / 2);
+    ellipse(x, y, r * 2, r * 2);
+  }
+  for (let i = 0; i < lines_bottomright.length; i++) {
+    let l = lines_bottomright[i];
+    stroke(makeRGB(17, 99, 247));
+    strokeWeight(2);
+    line(l.x1 * scaleX, l.y1 * scaleY, l.x2 * scaleX, l.y2 * scaleY);
+  }
+  for (let i = 0; i < arcs_bottomright.length; i++) {
+    const arcs = arcs_bottomright[i];
+    stroke(makeRGB(17, 99, 247));
+    strokeWeight(2);
+    noFill();
+    arc(
+      arcs.cx * scaleX,
+      arcs.cy * scaleY,
+      arcs.radius * ((scaleX + scaleY) / 2),
+      arcs.radius * ((scaleX + scaleY) / 2),
+      arcs.startAngle,
+      arcs.endAngle,
+    );
+  }
+  pop();
+}
+
+//---------------- Function: draw fixed shapes ----------------//
+function drawFixedCircles(scaleX, scaleY) {
+  let refCircle1 = { x: 140, y: 15, w: 130, h: 120 };
+  let circleX1 = width - (refCircle1.x + refCircle1.w / 2) * scaleX;
+  let circleY1 = refCircle1.y * scaleY + (refCircle1.h / 2) * scaleY;
+  let radius1 = 25 * scaleX;
+  let fillColor1 = makeRGB(248, 249, 251);
+  fill(fillColor1);
+  noStroke();
+  ellipse(circleX1, circleY1, radius1 * 2, radius1 * 2);
+  drawLinesInCircle({ x: circleX1, y: circleY1, r: radius1 });
+
+  let refCircle2 = { x: 150, y: 210, w: 130, h: 120 };
+  let circleX2 = width - (refCircle2.x + refCircle2.w / 2) * scaleX;
+  let circleY2 = refCircle2.y * scaleY + (refCircle2.h / 2) * scaleY;
+  let radius2 = 25 * scaleX;
+  let fillColor2 = makeRGB(248, 249, 251);
+  fill(fillColor2);
+  noStroke();
+  ellipse(circleX2, circleY2, radius2 * 2, radius2 * 2);
+  drawLinesInCircle({ x: circleX2, y: circleY2, r: radius2 });
+}
+
+//---------------- Function: draw coordinates axes ----------------//
+function drawCoordinates() {
+  stroke(10);
+  strokeWeight(5);
+  let margin = 40;
+  let margin1 = 40;
+  let margin2 = 105;
+  // Horizontal line
+  line(margin2, height / 2, width - margin2, height / 2);
+  // Vertical lines
+  line(width / 2, margin1, width / 2, height - margin1);
+  // Text style
+  textAlign(CENTER, CENTER);
+  textSize(20);
+  noStroke();
+  fill(20);
+  // Horizontal line：Sensing and Intuition
+  text('Sensing', margin / 2 + textWidth('Sensing') / 2, height / 2);
+  text('Intuition', width - margin / 2 - textWidth('Intuition') / 2, height / 2);
+  // Vertical lines：Thinking and Feeling
+  text('Thinking', width / 2, margin / 2);
+  text('Feeling', width / 2, height - margin / 2);
+}
+
+//---------------- Function: resize canvas ----------------//
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   generateStructuredTriangles(6, 8);
