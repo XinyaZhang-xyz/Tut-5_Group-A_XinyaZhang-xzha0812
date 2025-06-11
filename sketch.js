@@ -8,6 +8,10 @@ let dotRadius = 2; // Dot radius in the Sensing-Feeling pattern
 // Store original triangle positions for responsive design
 let relativeTriangles = [];
 
+// Interaction control variables
+let rippleEffects = []; // Store ripple effects
+
+
 
 /************** Color palrtte and random function **************/
 const palette = [
@@ -341,9 +345,89 @@ const arcs_bottomright = [
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  noLoop();
   generateStructuredTriangles(6, 8); // Rule grid structure
   updateTriangles();
+  loop(); // Start loop drawing (Animation)
+}
+
+/**************************** Function zone Mouse event ****************************/
+// Get current quadrant for checking which quadrant the mouse is in
+// The canvas is divided into four quadrants, and the corresponding quadrant number (1~4) is returned based on the mouse's (x, y) position, 
+// which is used for subsequent ripple effect classification.
+function getQuadrant(x, y) {
+  if (x < width/2 && y < height/2) return 1; // Top left
+  if (x > width/2 && y < height/2) return 2; // Top right
+  if (x < width/2 && y > height/2) return 3; // Bottom left
+  return 4; // Bottom right
+}
+
+// Create different types of ripple effects based on the mouse click position.
+function mousePressed() {
+  let quadrant = getQuadrant(mouseX, mouseY);
+  
+  // Create different ripple effects based on quadrant
+  switch(quadrant) {
+    case 1: // Top left - Geometric reconstruction
+      createGeometricEffect(mouseX, mouseY);
+      break;
+    case 2: // Top right - Building style
+      createBuildingEffect(mouseX, mouseY);
+      break;
+    case 3: // Bottom left - Triangle effect
+      createTriangleRipple(mouseX, mouseY);
+      break;
+    case 4: // Bottom right - Circle wave
+      createCircleWave(mouseX, mouseY);
+      break;
+  }
+}
+
+// Create geometric effect
+function createGeometricEffect(x, y) {
+  rippleEffects.push({
+    x: x,
+    y: y,
+    type: 'geometric',
+    radius: 0,
+    maxRadius: 150,
+    alpha: 255
+  });
+}
+
+// Create building effect
+function createBuildingEffect(x, y) {
+  rippleEffects.push({
+    x: x,
+    y: y,
+    type: 'building',
+    radius: 0,
+    maxRadius: 100,
+    alpha: 255
+  });
+}
+
+// Create triangle ripple effect
+function createTriangleRipple(x, y) {
+  rippleEffects.push({
+    x: x,
+    y: y,
+    type: 'triangle',
+    radius: 0,
+    maxRadius: 120,
+    alpha: 255
+  });
+}
+
+// Create circle wave
+function createCircleWave(x, y) {
+  rippleEffects.push({
+    x: x,
+    y: y,
+    type: 'circle',
+    radius: 0,
+    maxRadius: 80,
+    alpha: 255
+  });
 }
 
 
@@ -355,6 +439,9 @@ function draw() {
   // baseWidth and baseHeight are the original dimensions used as a reference during design.
   let scaleX = width / baseWidth;
   let scaleY = height / baseHeight;
+
+  // Update ripple effects to make them move
+  updateRippleEffects();
 
   //-----------------------Top left-----------------------//
   drawTopLeft(scaleX, scaleY);
@@ -373,7 +460,93 @@ function draw() {
 
   //-------------Draw coordinate axes and text------------//
   drawCoordinates();
+
+  // Draw all ripple effects
+  drawRippleEffects();
   
+}
+
+
+/****************** Function zone Animation Ripple effect ******************/
+// Update ripple effects to make the ripple with animation
+// The technology comes from the work Ripple Effect by Phoenix The Boi
+// The link: https://openprocessing.org/sketch/783165
+function updateRippleEffects() {
+  // Traverse ripple effects from back to front
+  for (let i = rippleEffects.length - 1; i >= 0; i--) {
+    let effect = rippleEffects[i];
+    effect.radius += 2; // the radius increases, indicating that the ripple is expanding.
+    effect.alpha -= 5; // the transparency decreases, indicating that the ripple is fading.
+
+    // if the transparency is less than 0 or the radius is greater than the maximum radius, delete the ripple.
+    if (effect.alpha <= 0 || effect.radius >= effect.maxRadius) {
+      // The splice() method changes the content of an array by deleting or replacing existing elements and/or adding new elements in place.
+      // The technology from the link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+      // The first parameter is the index to start deleting, and the second parameter is the number of elements to delete.
+      // Here, the current ripple effect is deleted.
+      // After deletion, the length of the array will decrease by 1, so we need to traverse from back to front.
+      rippleEffects.splice(i, 1); 
+    }
+  }
+}
+
+// Draw ripple effects for each ripple effect with variable shape and color
+function drawRippleEffects() {
+  for (let effect of rippleEffects) {
+    push();
+    noFill();
+    
+    switch(effect.type) {      
+      // Blue rotating lines, rotating four lines each frame, 
+      // forming a geometric cross or windmill effect, representing the feeling of "geometric reconstruction".
+      case 'geometric': 
+        stroke(36, 149, 248, effect.alpha);
+        strokeWeight(2);
+        for (let i = 0; i < 4; i++) {
+          rotate(PI/2);
+          line(effect.x, effect.y, 
+               effect.x + effect.radius, effect.y + effect.radius);
+        }
+        break;
+
+      // Red square ripple, representing "building style", 
+      // expanding a rectangle centered on the clicked point.
+      case 'building': 
+        stroke(217, 16, 9, effect.alpha);
+        strokeWeight(3);
+        rect(effect.x - effect.radius/2, effect.y - effect.radius/2, 
+             effect.radius, effect.radius);
+        break;
+      
+      // Yellow dynamic rotating triangle, the rotation angle increases frame by frame, 
+      // making the triangle rotate and expand, visually giving a sense of life and change.
+      case 'triangle': 
+        stroke(245, 202, 37, effect.alpha);
+        strokeWeight(2);
+        let angle = frameCount * 0.02;
+        for (let i = 0; i < 3; i++) {
+          let x = effect.x + cos(angle + i * TWO_PI/3) * effect.radius;
+          let y = effect.y + sin(angle + i * TWO_PI/3) * effect.radius;
+          if (i === 0) {
+            beginShape();
+          }
+          vertex(x, y);
+          if (i === 2) {
+            endShape(CLOSE);
+          }
+        }
+        break;
+      
+      // Blue circular ripple, expanding a circle centered on the clicked point, 
+      // similar to the common style of water ripple or click animation.
+      case 'circle': 
+        stroke(17, 99, 247, effect.alpha);
+        strokeWeight(2);
+        ellipse(effect.x, effect.y, effect.radius * 2);
+        break;
+    }
+    pop();
+  }
 }
 
 
