@@ -14,7 +14,6 @@
 
 - **Mouse Interaction**  
   - **Click Effects**  
-
     Different quadrants produce different visual effects:  
     - Click in Top-left Quadrant: Blue rotating lines  
     - Click in Top-right Quadrant: Red square diffused wave pattern
@@ -22,7 +21,6 @@
     - Click in Bottom-right Quadrant: Blue circular waves
 
   - **Hover Effects**  
-
     When the mouse hovers over different quadrants, different visual feedback will be generated:  
     - The top left and top right quadrants: rotation effect
     - The bottom left and bottom right quadrants: zoom effect
@@ -180,7 +178,8 @@
         ![Figure 3.3.3: drawSavedTriangles(triangles)](assets/3.3.3_drawSavedTriangles(triangles).png)
 
 
-      - **Conditional logic in generateStructuredTriangles(rows, cols)**  
+      - **Conditional logic in generateStructuredTriangles(rows, cols)** 
+       
         To support the state management of animation and static switching, an if statement has been added in the generateStructuredTriangles(rows, cols) function. When isGeneratingTriangles is false, the function clears the relativeTriangles array and immediately returns, thereby stopping the generation process of triangles. This mechanism ensures that when the user presses the control key, they can immediately pause the graphic generation and retain the existing graphics on the canvas.
 
         ![Figure 3.3.4: generateStructuredTriangles(rows, cols)](assets/3.3.4_generateStructuredTriangles(rows,%20cols).png)
