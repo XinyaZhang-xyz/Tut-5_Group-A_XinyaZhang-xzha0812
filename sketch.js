@@ -10,7 +10,10 @@ let relativeTriangles = [];
 
 // Interaction control variables
 let rippleEffects = []; // Store ripple effects
-
+let hoverEffects = { // Hover effect status
+  quadrant: 0, // Current hover quadrant
+  intensity: 0 // Hover intensity
+};
 
 
 /************** Color palrtte and random function **************/
@@ -430,6 +433,13 @@ function createCircleWave(x, y) {
   });
 }
 
+//Check mouse movement and update hover effect status
+function mouseMoved() {
+  // Get current quadrant and assign it to hoverEffects.quadrant
+  hoverEffects.quadrant = getQuadrant(mouseX, mouseY);
+  // Increase hover intensity by 0.1, maximum 1
+  hoverEffects.intensity = min(hoverEffects.intensity + 0.1, 1);
+}
 
 /**************************** Main drawing function ****************************/
 function draw() {
@@ -443,17 +453,50 @@ function draw() {
   // Update ripple effects to make them move
   updateRippleEffects();
 
-  //-----------------------Top left-----------------------//
-  drawTopLeft(scaleX, scaleY);
-
-  //-----------------------Top right-----------------------//
-  drawTopRight(scaleX, scaleY);
-
-  //----------------------Bottom left----------------------//
-  drawBottomLeft(scaleX, scaleY);
-
-  //----------------------Bottom right---------------------//
-  drawBottomRight(scaleX, scaleY);
+  // Draw hover effects, different quadrants will produce different hover effects
+  // The technology comes from the work Hover Interaction by AlizayAlQuadr
+  // The link: https://openprocessing.org/sketch/2604708
+  // The quadrant is determined by the mouse position, and the hover effect is displayed according to the quadrant.
+  // For example, the hover effect of the top left and top right quadrants is rotation, and the hover effect of the bottom left and bottom right quadrants is scaling.
+    ////-----------------------Top left-Rotation-----------------------//
+    push();
+    if (hoverEffects.quadrant === 1) {
+      translate(width/4, height/4);
+      rotate(hoverEffects.intensity * PI/32);
+      translate(-width/4, -height/4);
+    }
+    drawTopLeft(scaleX, scaleY);
+    pop();
+  
+    //-----------------------Top right-Rotation-----------------------//
+    push();
+    if (hoverEffects.quadrant === 2) {
+      translate(3*width/4, height/4);
+      rotate(-hoverEffects.intensity * PI/32);
+      translate(-3*width/4, -height/4);
+    }
+    drawTopRight(scaleX, scaleY);
+    pop();
+  
+    //----------------------Bottom left-Scaling-----------------------//
+    push();
+    if (hoverEffects.quadrant === 3) {
+      translate(width/4, 3*height/4);
+      scale(1 + hoverEffects.intensity * 0.05);
+      translate(-width/4, -3*height/4);
+    }
+    drawBottomLeft(scaleX, scaleY);
+    pop();
+  
+    //----------------------Bottom right-Scaling-----------------------//
+    push();
+    if (hoverEffects.quadrant === 4) {
+      translate(3*width/4, 3*height/4);
+      scale(1 + hoverEffects.intensity * 0.05);
+      translate(-3*width/4, -3*height/4);
+    }
+    drawBottomRight(scaleX, scaleY);
+    pop();
 
   // Draw fixed-size, scalable circles at a specified location //
   drawFixedCircles(scaleX, scaleY);
@@ -464,6 +507,8 @@ function draw() {
   // Draw all ripple effects
   drawRippleEffects();
   
+  // Gradually reduce the hover effect intensity
+  hoverEffects.intensity *= 0.95;
 }
 
 
