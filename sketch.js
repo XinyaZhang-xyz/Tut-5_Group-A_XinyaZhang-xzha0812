@@ -7,6 +7,9 @@ let dotSpacing = 24; // Dot spacing in the Sensing-Feeling pattern
 let dotRadius = 2; // Dot radius in the Sensing-Feeling pattern
 // Store original triangle positions for responsive design
 let relativeTriangles = [];
+let isGeneratingTriangles = true; // Control the state of triangle generation
+let lastTrianglesState = []; // Store the last triangle state
+let savedGradientTriangles = []; // Store the state of gradient triangles
 
 // Interaction control variables
 let rippleEffects = []; // Store ripple effects
@@ -14,6 +17,9 @@ let hoverEffects = { // Hover effect status
   quadrant: 0, // Current hover quadrant
   intensity: 0 // Hover intensity
 };
+let currentStyle = 'modern'; // Initial setting of building style, modern style will be the source code, classic style will be the source code with modified colors and line widths
+let isSymmetric = true; // Symmetry control to control whether to apply symmetry effect, true to apply, false to not apply
+let lineWeightMultiplier = 1; // Line weight multiplier to control line weight, 1 is the original line weight, 2 is two times, 3 is three times
 
 
 /************** Color palrtte and random function **************/
@@ -441,6 +447,30 @@ function mouseMoved() {
   hoverEffects.intensity = min(hoverEffects.intensity + 0.1, 1);
 }
 
+// Keyboard interaction
+function keyPressed() {
+  switch(key.toUpperCase()) {
+    case 'M': // Click M key to switch style
+      currentStyle = currentStyle === 'modern' ? 'classic' : 'modern';
+      break;
+    case 'G': // Click G key to control triangle generation
+      isGeneratingTriangles = !isGeneratingTriangles;
+      if (!isGeneratingTriangles) {
+        // Save the current state
+        lastTrianglesState = [...triangles];
+      }
+      break;
+    case 'S': // Click S key to switch symmetry/asymmetry
+      isSymmetric = !isSymmetric;
+      break;
+    case 'L': // Click L key to change line weight
+      lineWeightMultiplier = (lineWeightMultiplier % 3) + 1;
+      break;
+  }
+  redraw();
+}
+
+
 /**************************** Main drawing function ****************************/
 function draw() {
   background(250, 247, 235);
@@ -452,6 +482,22 @@ function draw() {
 
   // Update ripple effects to make them move
   updateRippleEffects();
+
+  // Apply symmetry effect
+  if (isSymmetric) {
+    push();
+    translate(width/2, height/2);
+    scale(1, -1);  // Vertical symmetry is used here
+    translate(-width/2, -height/2);
+  }
+
+  // Determine which triangle array to use based on the generation state
+  // If not in the generation state, and there is a last triangle state, then use the last triangle state
+  if (!isGeneratingTriangles && lastTrianglesState.length > 0) {
+    triangles = [...lastTrianglesState];
+  } else if (isGeneratingTriangles) {
+    updateTriangles();
+  }
 
   // Draw hover effects, different quadrants will produce different hover effects
   // The technology comes from the work Hover Interaction by AlizayAlQuadr
@@ -498,6 +544,10 @@ function draw() {
     drawBottomRight(scaleX, scaleY);
     pop();
 
+    if (isSymmetric) {
+      pop();
+    }
+
   // Draw fixed-size, scalable circles at a specified location //
   drawFixedCircles(scaleX, scaleY);
 
@@ -509,6 +559,15 @@ function draw() {
   
   // Gradually reduce the hover effect intensity
   hoverEffects.intensity *= 0.95;
+
+  // Apply the current style for keyboard interaction to change the line weight
+  if (currentStyle === 'classic') {
+    strokeWeight(8* lineWeightMultiplier);
+    stroke(0);
+  } else {
+    strokeWeight(1 * lineWeightMultiplier);
+    stroke(100);
+  }
 }
 
 
@@ -674,6 +733,13 @@ function drawTopLeft(scaleX, scaleY) {
     if (c.type === 'full') {
       ellipse(x, y, r * 2, r * 2);
     } else if (c.type === 'arc') {
+      // Set whether the line is displayed according to the current style
+      if (currentStyle === 'classic') {
+        noStroke();
+      } else {
+        strokeWeight(2);
+        stroke(0);
+      }
       arc(x, y, r * 2, r * 2, c.startAngle, c.endAngle, PIE);
     }
   }
@@ -681,7 +747,8 @@ function drawTopLeft(scaleX, scaleY) {
   for (let i = 0; i < lines_topleft.length; i++) {
     let l = lines_topleft[i];
     stroke(l.color);
-    strokeWeight(l.weight * ((scaleX + scaleY) / 2));
+    // Add lineWeightMultiplier, so that the line width changes with keyboard interaction
+    strokeWeight(l.weight * lineWeightMultiplier * ((scaleX + scaleY) / 2));
     let x1 = l.x1 * scaleX;
     let y1 = l.y1 * scaleY;
     let x2 = l.x2 * scaleX;
@@ -709,7 +776,12 @@ function drawTopRight(scaleX, scaleY) {
   }
   for (let i = 0; i < rects_topright_background_red.length; i++) {
     let r = rects_topright_background_red[i];
-    fill(makeRGB(217, 16, 9));
+    // Set the fill color according to the current style, and reverse the red and blue
+    if (currentStyle === 'classic') {
+      fill(makeRGB(17, 99, 247));
+    } else {
+      fill(makeRGB(217, 16, 9));
+    }
     noStroke();
     rect(
       r.x * scaleX,
@@ -740,7 +812,12 @@ function drawTopRight(scaleX, scaleY) {
   scale(-1, 1);
   for (let i = 0; i < rects_topright_building_red.length; i++) {
     let r = rects_topright_building_red[i];
-    fill(makeRGB(217, 16, 9));
+    // Set the fill color according to the current style, and reverse the red and blue
+    if (currentStyle === 'classic') {
+      fill(makeRGB(17, 99, 247));
+    } else {
+      fill(makeRGB(217, 16, 9));
+    }
     noStroke();
     rect(
       r.x * scaleX,
@@ -773,22 +850,23 @@ function drawTopRight(scaleX, scaleY) {
   }
 
   //Draw lines
+  // Introduce lineWeightMultiplier, so that the line width changes with keyboard interaction, the keyboard interaction is L key
   for (let i = 0; i < lines_topright_1.length; i++) {
     let l = lines_topright_1[i];
     stroke(makeRGB(0, 0, 0));
-    strokeWeight(10);
+    strokeWeight(10 * lineWeightMultiplier);
     line(l.x1 * scaleX, l.y1 * scaleY, l.x2 * scaleX, l.y2 * scaleY);
   }
   for (let i = 0; i < lines_topright_2.length; i++) {
     let l = lines_topright_2[i];
     stroke(makeRGB(0, 0, 0));
-    strokeWeight(5);
+    strokeWeight(5 * lineWeightMultiplier);
     line(l.x1 * scaleX, l.y1 * scaleY, l.x2 * scaleX, l.y2 * scaleY);
   }
   for (let i = 0; i < lines_topright_3.length; i++) {
     let l = lines_topright_3[i];
     stroke(makeRGB(0, 0, 0));
-    strokeWeight(2);
+    strokeWeight(2 * lineWeightMultiplier);
     line(l.x1 * scaleX, l.y1 * scaleY, l.x2 * scaleX, l.y2 * scaleY);
   }
   pop();
@@ -887,8 +965,24 @@ function drawBottomLeft() {
   rect(width / 2 - 40, height / 2, 15, height / 2);  // Medium width
   rect(width / 2 - 55, height / 2, 10, height / 2);  // Narrowest rectangle
 
+  // Determine whether to generate or display triangles
+  if (isGeneratingTriangles) {
+    // Generate new triangle data
+    savedGradientTriangles = generateGradientTriangles(border);
+  }
 
-  // Draw gradient triangles in the content border
+  // Draw and store gradient triangles data regardless of whether they are in the generation state
+  if (savedGradientTriangles.length > 0) {
+    drawSavedTriangles(savedGradientTriangles);
+  }
+}
+
+
+//----------- Function: Generation and drawing of the triangular gradient background in the lower left corner -------------//
+// Generate triangles representing emotional patterns in Sensing-Feeling quadrant (Left Corner)
+// Draw gradient triangles in the content border
+function generateGradientTriangles(border) {
+  let triangles = [];
   // Limit the number and size of the triangles based on the border size (window size).
   let triangleCount = floor(border.w * border.h / 9000); // Calculate triangle count based on area, 9000 is number to make the triangle count reasonable, the less the number, the more triangles will be generated
   let minSize = min(border.w, border.h) / 10;            // Minimum triangle size
@@ -931,21 +1025,36 @@ function drawBottomLeft() {
     let c1 = colors[floor(random(colors.length))];
     let c2 = colors[floor(random(colors.length))];
 
-    // Draw gradient triangle
+    // Store the triangle data in the triangles array
+    triangles.push({
+      points: points,
+      colors: [
+        color(c1[0], c1[1], c1[2], 160),
+        color(c2[0], c2[1], c2[2], 160)
+      ]
+    });
+  }
+  return triangles;
+}
+
+// Draw the gradient triangles stored in the triangles array
+function drawSavedTriangles(triangles) {
+  for (let triangle of triangles) {
     drawGradientTriangle(
-      points[0],
-      points[1],
-      points[2],
-      color(c1[0], c1[1], c1[2], 160),  // The color of the triangle, the alpha is 160, which is 60% transparent
-      color(c2[0], c2[1], c2[2], 160)
+      triangle.points[0],
+      triangle.points[1],
+      triangle.points[2],
+      triangle.colors[0],
+      triangle.colors[1]
     );
   }
 }
 
-//----------- Function: Generation and drawing of the triangular gradient background in the lower left corner -------------//
-// Generate triangles representing emotional patterns in Sensing-Feeling quadrant (Left Corner)
+// Determine whether the generation state is true, if it is true, generate triangles according to rows and cols
+// If it is not true, return directly
 // This technique is from https://editor.p5js.org/ogt/sketches/U2nApW3un
 function generateStructuredTriangles(rows, cols) {
+  if (!isGeneratingTriangles) return; // If it is not true, set relativeTriangles to an empty array and return directly
   relativeTriangles = [];
   // Divide the entire area into cols × rows grids, and set the relative width and height of each grid.
   let cellW = 1 / cols;
@@ -1067,13 +1176,23 @@ function drawBottomRight(scaleX, scaleY) {
   for (let i = 0; i < lines_bottomright.length; i++) {
     let l = lines_bottomright[i];
     stroke(makeRGB(17, 99, 247));
-    strokeWeight(2);
+    // Set the line width according to the current style
+    if (currentStyle === 'classic') {
+      strokeWeight(4);
+    } else {
+      strokeWeight(2);
+    }
     line(l.x1 * scaleX, l.y1 * scaleY, l.x2 * scaleX, l.y2 * scaleY);
   }
   for (let i = 0; i < arcs_bottomright.length; i++) {
     const arcs = arcs_bottomright[i];
     stroke(makeRGB(17, 99, 247));
-    strokeWeight(2);
+    // Set the line width according to the current style
+    if (currentStyle === 'classic') {
+      strokeWeight(8);
+    } else {
+      strokeWeight(2);
+    }
     noFill();
     arc(
       arcs.cx * scaleX,
